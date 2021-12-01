@@ -13,16 +13,21 @@ status: implementable
 - [Summary](#summary)
 - [Motivation](#motivation)
   - [Goals](#goals)
+  - [Non-Goals](#non-goals)
 - [Proposal](#proposal)
   - [User Stories](#user-stories)
   - [Usage examples](#usage-examples)
 - [Design Details](#design-details)
   - [Disable creation of RBAC resources at cluster level](#disable-creation-of-rbac-resources-at-cluster-level)
   - [Scenarios](#scenarios)
-    - [Disable auto creation of RBAC resources](#disable-auto-creation-of-rbac-resources)
-    - [Enable auto creation of RBAC resources (Default behavior)](#enable-auto-creation-of-rbac-resources)
+      - [Disable auto creation of RBAC resources](#disable-auto-creation-of-rbac-resources)
+      - [Enable auto creation of RBAC resources (Default behavior)](#enable-auto-creation-of-rbac-resources-default-behavior)
+- [Advantages](#advantages)
+- [Test Plan](#test-plan)
+- [Alternatives](#alternatives)
 - [Risk](#risk)
 - [Alternative Approach](#alternative-approach)
+- [Follow Up Story](#follow-up-story)
 <!-- /toc -->
 
 ## Summary
