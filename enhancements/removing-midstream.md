@@ -218,11 +218,63 @@ but this is subject to change if we feel like it.
 Given that assumption, the goal here would be to fetch the payload from this information and copy the
 content into the correct set of containers.
 
+```bash
+$ make sources/operator/fetch-payload
+# […]
+```
+
+TBD
+
 ### Apply patches if need be
+
+All our container builds are done in multi-stage : one the builds and one that is the final image.
+We can use this to our advantage to apply the patches at build time, just after getting the sources in.
+In a nutshell we are looking to do the following (for each container image):
+
+- copy remote source
+- copy patches
+- apply patches
+- build
+
+This means, however that patches needs to live at the same level as the `Dockerfile`. As there is multiple 
+images for a given component, we will have to "duplicate" the `patches` on all component's.
+
+```bash 
+$ make patches
+# sync patches from ./patches to each container images
+$ make container/openshift-pipelines-controller/patches
+# sync patches for the openshift-pipelines-controller image
+```
+
 
 ### Build images
 
+Images will be build by `brew` in the Red Hat Toolchain. That said, it should be possible to build images,
+and even the bundle, ahead of time. This is already the case, by doing a similar job as what CPaaS does with
+the templates (`.in` files).
+
+```bash 
+$ make images
+# builds all images but the operator bundle
+$ make images/push
+# builds and push all images but the operator bundle
+$ make images/digest
+# build, push and write image digest for all images but the operator bundle
+$ make container/openshift-pipelines-controller
+# build openshift-pipelines-controller image
+$ make container/openshift-pipelines-controller/push
+# build and push openshift-pipelines-controller image
+# […]
+```
+
 ### Create a gerrit changeset
+
+- We need to setup some credentials (or use a bot account) to create a changeset for gerrit.
+  - **todo** know who to ping to create a bot for gerrit
+- Create a branch for the sync to happen (`upgrade-$(date …)`)
+- Update upstream source, sync patches and stuff
+- (optional) Build images to make sure it works
+- `git review -f {branch-name}` to create a changeset
 
 ## Alternatives
 
