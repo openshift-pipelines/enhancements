@@ -60,6 +60,56 @@ product and thus CI results is most not useful.
 
 ## Proposal
 
+There is two different case to handle:
+- Components (pipeline, triggers, chains, …)
+- Operator
+
+Let's dig into what needs to be done for both here, and then we can try to define a set of
+things to run (in Task/Pipeline) to handle both these cases.
+
+### Components
+
+For each components we ship as part of OpenShift Pipelines, there is two simple steps to do:
+- Fetch the upstream repository at a given branch
+- Apply patches if need be (if they didn't get in, …)
+- Build the images
+
+
+### Operator
+
+For the operator, it is a bit trickier as we have an extra step to take:
+- Fetch the upstream repository at a given branch
+- Fetch the component's payloads at a given release / nightly
+- Apply patches if need be (same as above, …)
+- Build the images
+
+### Combination of the two
+
+If we combine both, it looks a little bit like the following
+
+- Fetch the upstream repository
+  - Get the latest commit of the tracked branch (or tag)
+  - Update `upstream_sources.yml` with it
+- Read the operator metadata and fetch payload version
+  - latest means we take nightly payload
+  - otherwise we get the released payload
+- Apply patches if need be
+- Build images
+  - ahead of time to not submit a changeset if it doesn't build
+  - or just send a changeset
+
+This two pieces can happen when we track new commits in the branches we track. As of today, CPaaS
+doesn't seem to support this kind of custom behavior inside the "poll upstream job", but we could
+deactivate it and have our own, living in our long-living *dogfooding* cluster.
+
+In addition, it should be possible to make this all work locally on your laptop. What this means
+is that it should be possible to update upstream source from upstream repositories and this would
+allow you to get the proper payload apply patches and build the images.
+
+## Alternatives
+
+## Open questions
+
 TBD
 
 What is midstream used for?
@@ -67,3 +117,4 @@ What is midstream used for?
   -Move patches where? Downstream? Upstream?
 - Branches and tags are tracked in upstream_sources.yaml
 - CI jobs used to be run to test midstream (not downstream builds) on OpenShift
+- how frequently do we need to sync branches? every merge or nightly? this needs to be automated, right?
