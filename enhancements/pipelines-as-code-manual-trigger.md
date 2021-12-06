@@ -2,7 +2,7 @@
 
 * We need to let the user fire a pipelinerun without going by Github or others.
 
-* Pipelinerun still located ina a repository and a SHA.
+* Pipelinerun still located in a a repository and a SHA.
 
 * For github-app installation method we can generate a github temporary token at will
 
