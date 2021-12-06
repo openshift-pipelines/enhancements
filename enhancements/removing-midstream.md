@@ -276,6 +276,26 @@ $ make container/openshift-pipelines-controller/push
 - (optional) Build images to make sure it works
 - `git review -f {branch-name}` to create a changeset
 
+### Automation & execution
+
+This "process" should be run automatically at a given pace. Today the `poll-upstream` job runs daily, and will
+upgrade the gerrit repository daily, generating a daily build. 
+
+TBD
+
+### Where should this live
+
+One question is where all this automation should live. As of today, the choice is to make it live in the gerrit
+repository itself, making it the source of truth of mostly anything.
+
+We could think of moving all this outside of gerrit, with our own layout and copy the "generated" output to gerrit,
+so that it generates a changeset with the latest change we want for our build. We could also use that same repository
+to be the source of truth of all the other repository that we own / have to manage, a.k.a cpaas/product-configs/…,
+HB pipeline definitions, …
+
+The later is appealing *but* my feeling is that we can start simple, use gerrit for it, and as times goes, if we feel
+it would be better to own our own complete repository and layout, we could migrate to it.
+
 ## Alternatives
 
 ### Keep midstream, and automate midstream sync
@@ -296,7 +316,7 @@ TBD
 
 What is midstream used for?
 - Apply patches to upstream code
-  -Move patches where? Downstream? Upstream?
+  - Move patches where? Downstream? Upstream?
 - Branches and tags are tracked in upstream_sources.yaml
 - CI jobs used to be run to test midstream (not downstream builds) on OpenShift
 - how frequently do we need to sync branches? every merge or nightly? this needs to be automated, right?
