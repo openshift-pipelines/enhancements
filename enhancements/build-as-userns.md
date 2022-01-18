@@ -73,7 +73,7 @@ has everything we need to run as user inside the containers using the user `'bui
 ```yaml
 ...
 runAsUser:
-  type: RunAsAny
+  type: MustRunAs
   uid: 1000
 seLinuxContext:
   type: MustRunAs
