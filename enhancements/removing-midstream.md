@@ -1,5 +1,5 @@
 ---
-status: proposed
+status: implemented
 title: Removing midstream for OpenShift Pipelines releases
 creation-date: '2021-12-01'
 last-updated: '2021-12-01'
