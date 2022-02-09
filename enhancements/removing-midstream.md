@@ -18,6 +18,20 @@ releases).
 - [Goals](#goals)
 - [Requirements](#requirements)
 - [Proposal](#proposal)
+  - [Components](#components)
+  - [Operator](#operator)
+  - [Combination of the two](#combination-of-the-two)
+- [Design detail](#design-detail)
+  - [Fetch latest version from upstream](#fetch-latest-version-from-upstream)
+  - [Read operator metadata and fetch payload versions](#read-operator-metadata-and-fetch-payload-versions)
+  - [Apply patches if need be](#apply-patches-if-need-be)
+  - [Build images](#build-images)
+  - [Create a gerrit changeset](#create-a-gerrit-changeset)
+  - [Automation &amp; execution](#automation--execution)
+  - [Where should this live](#where-should-this-live)
+- [Alternatives](#alternatives)
+  - [Keep midstream, and automate midstream sync](#keep-midstream-and-automate-midstream-sync)
+- [Open questions](#open-questions)
 <!-- /toc -->
 
 ## Summary
