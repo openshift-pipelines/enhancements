@@ -9,6 +9,31 @@ authors:
 
 # PipelinesAsCode in Tekton Operator
 
+<!-- toc -->
+  - [Final Decision:](#final-decision)
+- [Proposed Solutions:](#proposed-solutions)
+  - [Integrating with Upstream Tekton Operator](#integrating-with-upstream-tekton-operator)
+    - [How?](#how)
+    - [Pros](#pros)
+    - [Cons](#cons)
+  - [Adding PAC as a component in TektonAddon](#adding-pac-as-a-component-in-tektonaddon)
+    - [How?](#how-1)
+    - [Pros](#pros-1)
+    - [Cons](#cons-1)
+  - [Single Separate Code Repository for OpenShift specific extension and component](#single-separate-code-repository-for-openshift-specific-extension-and-component)
+    - [How?](#how-2)
+    - [Pros](#pros-2)
+    - [Cons](#cons-2)
+  - [Single Separate Deployment for OpenShift Component](#single-separate-deployment-for-openshift-component)
+    - [How?](#how-3)
+    - [Pros](#pros-3)
+    - [Cons](#cons-3)
+  - [One Deployment per OpenShift component](#one-deployment-per-openshift-component)
+    - [How?](#how-4)
+    - [Pros](#pros-4)
+    - [Cons](#cons-4)
+<!-- /toc -->
+
 Goal: Installing and Managing PAC through Tekton Operator/OpenShift Pipelines Operator.
 
 This document explores different ways to do that and to decide which way we want to proceed.
@@ -60,8 +85,8 @@ This document explores different ways to do that and to decide which way we want
 - Having multiple repositories give more freedom
 - Single Image
 - Auto installation of pac can be handled
-  - in upstream openshift extension 
-  - May be using init container 
+  - in upstream openshift extension
+  - May be using init container
   - Or by watching TektonCOnfig as Secondary Resources
 
 #### Cons
@@ -79,14 +104,14 @@ This document explores different ways to do that and to decide which way we want
 
 #### Pros
 - Having multiple repositories give more freedom
-- Auto installation of pac can be handled 
+- Auto installation of pac can be handled
   - in upstream openshift extension
   - May be using init container
   - Or by watching TektonConfig as Secondary Resources
 
 #### Cons
-- Local development would be different from upstream in this case 
-- Upstream dev will happen as it is currently, for pac reconciler it would be in this repo 
+- Local development would be different from upstream in this case
+- Upstream dev will happen as it is currently, for pac reconciler it would be in this repo
 - Setup New CI
 
 
