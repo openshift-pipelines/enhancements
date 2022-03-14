@@ -1,5 +1,5 @@
 ---
-title: Option to disable default creation of service account and rbac resources
+title: Pipelines as code event filtering with CEL
 authors:
   - "@chmouelito"
 creation-date: 2021-03-14
