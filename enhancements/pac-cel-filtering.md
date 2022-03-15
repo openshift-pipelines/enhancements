@@ -24,7 +24,7 @@ targets a specific heads like branch or tags or an event (pull_request, issue).
     pipelinesascode.tekton.dev/on-event: "[%s]"
 ```
 
-This works for most cases but thi misses some flexibility for some advanced use cases.
+This works for most cases but this misses some flexibility for some advanced use cases.
 
 For example when trying this user story :
 
@@ -61,7 +61,7 @@ We would still keep the basic filtering mechanism for now and only let the user 
 ## Advantage
 
 - We can address most of the Gitlab action use cases <https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on>
-- Use should be familiar with CEL syntax if they are familiar with triggers.
+- User should be familiar with CEL syntax if they are familiar with triggers.
 
 ## Cons
 
