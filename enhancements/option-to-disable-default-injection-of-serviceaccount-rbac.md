@@ -3,8 +3,8 @@ title: Option to disable default creation of service account and rbac resources
 authors:
   - "@savitaashture"
 creation-date: 2021-09-19
-last-updated: 2021-09-19
-status: implementable
+last-updated: 2022-08-30
+status: implemented
 ---
 
 # TEP-0001: Option to disable default creation of service account and rbac resources on Openshift
@@ -42,6 +42,10 @@ https://issues.redhat.com/browse/SRVKP-1670
 
 https://issues.redhat.com/browse/SRVKP-1649
 
+https://issues.redhat.com/browse/SRVKP-2256
+
+https://issues.redhat.com/browse/SRVKP-2256
+
 ## Motivation
 
 OpenShift Pipelines operator will create a RBAC resources (ServiceAccount(`pipeline`), RoleBinding, SCCRoleBinding, CABundlesConfigMap and openshift-pipelines-clusterinterceptors) on all namespace when installed.
@@ -50,18 +54,21 @@ This can be seen as a security issue as some customers have reported. It would b
 
 ### Goals
 
-Provide way to cluster admin to disable auto creation of rbac resources at cluster level. 
+Provide way to cluster admin to disable auto creation of rbac resources at cluster level and persist resource(ServiceAccount(`pipeline`)) if it already exists. 
 
 ### Non-Goals
 
 ## Proposal
 
 Installation of OpenShift Pipelines operator by default create RBAC resources on all namespaces.
-cluster admin should have the permission to disable RBAC resource creation at cluster level using `TektonConfig CR`. 
+cluster admin should have the permission to disable RBAC resource creation at cluster level using `TektonConfig CR` and persist existing ServiceAccount(`pipeline`). 
    
 ### User Stories
 As a cluster admin, I want to be able to disable auto creation of ServiceAccount and RBAC resources at cluster level because
 some customers have reported that SCCRolebinding `pipelines-scc-rolebinding` can be seen as a security issue which has **RunAsAny** among other things.
+
+As a cluster admin, I want to persist my ServiceAccount at the update time or disabling rbac as the ServiceAccount may have some additional secrets attached.
+
 
 ### Usage examples
 
@@ -70,7 +77,7 @@ some customers have reported that SCCRolebinding `pipelines-scc-rolebinding` can
 The main goal of this TEP is to provide ways to cluster admin to disable creation of RBAC resources at cluster level.
 
 ### Disable creation of RBAC resources at cluster level
-Cluster admin can create/edit TektonConfig CR and set `createRbacResource` to `false` so that RBAC resources will not create in any of the namespaces in that cluster.
+Cluster admin can create/edit TektonConfig CR and set `createRbacResource` to `false` so that RBAC resources will not create in any of the namespaces in that cluster. And should persist existing pipeline ServiceAccount.
 ```yaml
 apiVersion: operator.tekton.dev/v1alpha1
 kind: TektonConfig
