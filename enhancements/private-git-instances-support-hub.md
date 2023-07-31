@@ -9,7 +9,6 @@ authors: ["vinamra28"]
 # Private Git instances support in Hub
 
 <!-- toc -->
-
 - [Summary](#summary)
 - [Motivation](#motivation)
   - [Goals](#goals)
@@ -21,7 +20,6 @@ authors: ["vinamra28"]
 - [Design](#design)
   - [Cloning private repositories](#cloning-private-repositories)
   - [Serving README and YAML via Endpoints](#serving-readme-and-yaml-via-endpoints)
-- [References (optional)](#references-optional)
 <!-- /toc -->
 
 ## Summary

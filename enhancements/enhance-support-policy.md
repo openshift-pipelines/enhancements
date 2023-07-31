@@ -1,8 +1,8 @@
 ---
-status: proposed
+status: implemented
 title: Enhance Support Policy of OpenShit Pipelines
 creation-date: '2022-02-09'
-last-updated: '2022-02-09'
+last-updated: '2023-07-31'
 authors: ['vdemeester']
 ---
 
